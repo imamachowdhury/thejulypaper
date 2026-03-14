@@ -12,7 +12,7 @@
                 <div class="md:col-span-2 group cursor-pointer" onclick="window.location='{{ route('articles.show', $featuredArticles[0]->slug) }}'">
                     <div class="aspect-[16/10] overflow-hidden rounded bg-slate-100 mb-4">
                         @if($featuredArticles[0]->featured_image)
-                        <img src="{{ asset('storage/' . $featuredArticles[0]->featured_image) }}" alt="{{ $featuredArticles[0]->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <img src="{{ \Illuminate\Support\Facades\Storage::url($featuredArticles[0]->featured_image) }}" alt="{{ $featuredArticles[0]->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         @else
                         <div class="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400 font-serif font-black text-4xl opacity-10">জুলাই পেপার</div>
                         @endif
@@ -36,7 +36,7 @@
                     <div class="group cursor-pointer flex flex-col" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
                         <div class="aspect-video overflow-hidden rounded bg-slate-100 mb-3">
                             @if($article->featured_image)
-                            <img src="{{ asset('storage/' . $article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
                             @else
                             <div class="w-full h-full bg-slate-100"></div>
                             @endif
@@ -62,7 +62,7 @@
                     <a href="{{ route('articles.show', $article->slug) }}" class="group flex flex-row-reverse lg:block gap-4 border-b lg:border-none pb-4 lg:pb-0">
                         <div class="w-1/3 lg:w-full aspect-[16/9] mb-0 lg:mb-4 flex-shrink-0">
                             @if($article->featured_image)
-                            <img src="{{ asset('storage/' . $article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover rounded-sm group-hover:shadow-md transition-all">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover rounded-sm group-hover:shadow-md transition-all">
                             @else
                             <div class="w-full h-full bg-slate-50 border flex items-center justify-center text-slate-300 font-serif text-sm opacity-50">জুলাই পেপার</div>
                             @endif
@@ -138,7 +138,7 @@
                         </div>
                         @if($article->featured_image)
                         <div class="w-20 h-20 md:w-24 md:h-16 flex-shrink-0 rounded-sm bg-slate-100 overflow-hidden">
-                            <img src="{{ asset('storage/' . $article->featured_image) }}" class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
                         </div>
                         @endif
                     </div>
@@ -151,7 +151,7 @@
                     <div class="group cursor-pointer" onclick="window.location='{{ route('articles.show', $first->slug) }}'">
                         <div class="aspect-[16/10] overflow-hidden rounded-sm bg-slate-100 mb-6">
                             @if($first->featured_image)
-                            <img src="{{ asset('storage/' . $first->featured_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($first->featured_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             @endif
                         </div>
                         <h4 class="text-2xl md:text-3xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">{{ $first->title }}</h4>
@@ -170,7 +170,7 @@
                         </div>
                         @if($article->featured_image)
                         <div class="w-20 h-20 md:w-24 md:h-16 flex-shrink-0 rounded-sm bg-slate-100 overflow-hidden">
-                            <img src="{{ asset('storage/' . $article->featured_image) }}" class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
                         </div>
                         @endif
                     </div>
