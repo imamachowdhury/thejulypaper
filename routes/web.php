@@ -33,6 +33,19 @@ Route::get('/init-admin', function () {
     }
 });
 
+Route::get('/debug-storage', function () {
+    $publicPath = public_path('storage');
+    $storagePath = storage_path('app/public/articles');
+    
+    return [
+        'storage_link_exists' => file_exists($publicPath),
+        'storage_link_is_symlink' => is_link($publicPath),
+        'articles_folder_exists' => is_dir($storagePath),
+        'files_found' => is_dir($storagePath) ? array_diff(scandir($storagePath), ['.', '..']) : 'Folder not found',
+        'current_app_url' => config('app.url'),
+    ];
+});
+
 Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])->name('page.show');
 
 
