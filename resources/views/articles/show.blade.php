@@ -36,7 +36,7 @@
 
             @if($article->featured_image)
             <figure class="mb-8 overflow-hidden rounded shadow-sm">
-                <img src="{{ asset('storage/' . $article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-auto">
+                <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-auto">
             </figure>
             @endif
 
@@ -83,7 +83,7 @@
                         </div>
                         @if($related->featured_image)
                         <div class="w-16 h-16 bg-slate-100 rounded flex-shrink-0 overflow-hidden">
-                            <img src="{{ asset('storage/' . $related->featured_image) }}" alt="{{ $related->title }}" class="w-full h-full object-cover">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($related->featured_image) }}" alt="{{ $related->title }}" class="w-full h-full object-cover">
                         </div>
                         @else
                         <div class="w-16 h-16 bg-slate-100 rounded flex-shrink-0"></div>
