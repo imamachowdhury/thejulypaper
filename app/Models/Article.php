@@ -69,13 +69,14 @@ class Article extends Model
         'title', 'slug', 'content', 'excerpt', 'featured_image',
         'status', 'published_at', 'user_id', 'category_id',
         'meta_title', 'meta_description', 'is_featured', 'view_count',
-        'source_name', 'source_url'
+        'source_name', 'source_url', 'references'
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
         'is_featured' => 'boolean',
         'view_count' => 'integer',
+        'references' => 'array',
     ];
 
     public function sluggable(): array

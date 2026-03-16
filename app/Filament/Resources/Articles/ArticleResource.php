@@ -49,6 +49,26 @@ class ArticleResource extends Resource
                                     ->columnSpanFull(),
                             ]),
 
+                        Section::make('অতিরিক্ত সূত্র (Additional References)')
+                            ->schema([
+                                Forms\Components\Repeater::make('references')
+                                    ->label('সূত্র তালিকা')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title')
+                                            ->label('সূত্রের নাম')
+                                            ->placeholder('যেমন: প্রথম আলো রিপোর্ট')
+                                            ->required(),
+                                        Forms\Components\TextInput::make('url')
+                                            ->label('সূত্রের লিংক')
+                                            ->placeholder('https://...')
+                                            ->url(),
+                                    ])
+                                    ->columns(2)
+                                    ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
+                                    ->collapsible()
+                                    ->default([]),
+                            ]),
+
                         Section::make('SEO')
                             ->schema([
                                 Forms\Components\TextInput::make('meta_title'),

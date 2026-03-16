@@ -68,10 +68,32 @@
             <figure class="mb-8 overflow-hidden rounded shadow-sm">
                 <img src="{{ $article->featured_image_url }}" alt="{{ $article->title }}" class="w-full h-auto">
             </figure>
-
             <div class="prose prose-lg max-w-none text-slate-800 prose-pa-red">
                 {!! $article->content !!}
             </div>
+
+            @if($article->references && count($article->references) > 0)
+            <div class="mt-12 p-6 bg-slate-50 rounded-lg border border-slate-100">
+                <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-4 flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-pa-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    তথ্যসূত্র (References)
+                </h4>
+                <ul class="space-y-2">
+                    @foreach($article->references as $ref)
+                    <li class="flex items-start text-sm text-slate-600">
+                        <span class="mr-2 text-pa-red">•</span>
+                        @if(!empty($ref['url']))
+                            <a href="{{ $ref['url'] }}" target="_blank" class="hover:text-pa-red hover:underline transition-colors">{{ $ref['title'] }}</a>
+                        @else
+                            <span>{{ $ref['title'] }}</span>
+                        @endif
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
 
             <!-- Author & Tags -->
             <div class="mt-12 pt-8 border-t">
