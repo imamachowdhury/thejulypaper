@@ -120,4 +120,16 @@ class Article extends Model
         
         return str_replace($search, $replace, $date);
     }
+
+    /**
+     * Get the URL for the featured image, or a placeholder if it doesn't exist.
+     */
+    public function getFeaturedImageUrlAttribute(): string
+    {
+        if ($this->featured_image && \Illuminate\Support\Facades\Storage::disk('public')->exists($this->featured_image)) {
+            return \Illuminate\Support\Facades\Storage::url($this->featured_image);
+        }
+
+        return 'https://placehold.co/800x450/f1f5f9/64748b?text=The+July+Paper';
+    }
 }

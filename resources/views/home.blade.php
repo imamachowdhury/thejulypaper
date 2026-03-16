@@ -14,14 +14,12 @@
         <div class="lg:col-span-5 space-y-10">
             <!-- Lead Article -->
             <div class="group cursor-pointer" onclick="window.location='{{ route('articles.show', $featuredArticles[0]->slug) }}'">
-                @if($featuredArticles[0]->featured_image)
                 <div class="aspect-[16/10] overflow-hidden rounded bg-slate-100 mb-5 relative">
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($featuredArticles[0]->featured_image) }}" 
+                    <img src="{{ $featuredArticles[0]->featured_image_url }}" 
                          alt="{{ $featuredArticles[0]->title }}" 
                          fetchpriority="high"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                 </div>
-                @endif
                 <div class="space-y-3">
                     <span class="text-pa-red font-black text-xs uppercase">{{ $featuredArticles[0]->category->name }}</span>
                     <h1 class="text-2xl md:text-3xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">
@@ -52,14 +50,12 @@
         <div class="lg:col-span-4 lg:border-l lg:pl-10 space-y-10 border-t lg:border-t-0 pt-10 lg:pt-0">
             @foreach($featuredArticles->slice(3, 2) as $article)
             <div class="group cursor-pointer space-y-4" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
-                @if($article->featured_image)
                 <div class="aspect-video overflow-hidden rounded bg-slate-100">
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                    <img src="{{ $article->featured_image_url }}" 
                          alt="{{ $article->title }}" 
                          loading="lazy"
                          class="w-full h-full object-cover">
                 </div>
-                @endif
                 <div class="space-y-3">
                     <h2 class="text-xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">
                         {{ $article->title }}
@@ -83,16 +79,12 @@
                             {{ $article->title }}
                         </h4>
                     </div>
-                    @if($article->featured_image)
                     <div class="w-20 h-14 flex-shrink-0 bg-slate-100 overflow-hidden rounded-sm">
-                        <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                        <img src="{{ $article->featured_image_url }}" 
                              alt="{{ $article->title }}"
                              loading="lazy"
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
-                    @else
-                    <div class="w-20 h-14 bg-slate-50 rounded-sm"></div>
-                    @endif
                 </div>
                 @endforeach
             </div>
@@ -120,14 +112,10 @@
         <div class="group cursor-pointer space-y-5" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
             <div class="flex justify-center flex-shrink-0">
                 <div class="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-pa-red/10 p-1 group-hover:border-pa-red transition-all duration-500">
-                    @if($article->featured_image)
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                    <img src="{{ $article->featured_image_url }}" 
                          alt="{{ $article->title }}"
                          loading="lazy"
                          class="w-full h-full object-cover rounded-full">
-                    @else
-                    <div class="w-full h-full bg-slate-100 rounded-full"></div>
-                    @endif
                 </div>
             </div>
             <div class="text-center space-y-2">
@@ -166,14 +154,12 @@
                             <h4 class="text-sm md:text-base font-bold leading-snug group-hover:text-pa-red transition-colors pa-headline">{{ $article->title }}</h4>
                             <span class="mt-2 block text-[10px] text-slate-400 font-bold uppercase">{{ $article->published_at ? toBangla($article->published_at->diffForHumans()) : '' }}</span>
                         </div>
-                        @if($article->featured_image)
                         <div class="w-20 h-20 md:w-24 md:h-16 flex-shrink-0 rounded-sm bg-slate-100 overflow-hidden">
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                            <img src="{{ $article->featured_image_url }}" 
                                  alt="{{ $article->title }}"
                                  loading="lazy"
                                  class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
                         </div>
-                        @endif
                     </div>
                     @endforeach
                 </div>
@@ -183,12 +169,10 @@
                     @php $first = $articles->first(); @endphp
                     <div class="group cursor-pointer" onclick="window.location='{{ route('articles.show', $first->slug) }}'">
                         <div class="aspect-[16/10] overflow-hidden rounded-sm bg-slate-100 mb-6">
-                            @if($first->featured_image)
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($first->featured_image) }}" 
+                            <img src="{{ $first->featured_image_url }}" 
                                  alt="{{ $first->title }}"
                                  loading="lazy"
                                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            @endif
                         </div>
                         <h4 class="text-2xl md:text-3xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">{{ $first->title }}</h4>
                         <p class="mt-4 text-slate-600 text-sm md:text-base line-clamp-3 leading-relaxed">{{ $first->excerpt ?: Str::limit(strip_tags($first->content), 150) }}</p>
@@ -204,14 +188,12 @@
                             <h4 class="text-sm md:text-base font-bold leading-snug group-hover:text-pa-red transition-colors pa-headline">{{ $article->title }}</h4>
                             <span class="mt-2 block text-[10px] text-slate-400 font-bold uppercase">{{ $article->published_at ? toBangla($article->published_at->diffForHumans()) : '' }}</span>
                         </div>
-                        @if($article->featured_image)
                         <div class="w-20 h-20 md:w-24 md:h-16 flex-shrink-0 rounded-sm bg-slate-100 overflow-hidden">
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                            <img src="{{ $article->featured_image_url }}" 
                                  alt="{{ $article->title }}"
                                  loading="lazy"
                                  class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
                         </div>
-                        @endif
                     </div>
                     @endforeach
                 </div>

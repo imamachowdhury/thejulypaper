@@ -13,11 +13,9 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach($articles as $article)
         <div class="group border rounded-sm overflow-hidden hover:shadow-lg transition-all bg-white">
-            @if($article->featured_image)
             <div class="aspect-video relative overflow-hidden bg-slate-100">
-                <img src="{{ Storage::url($article->featured_image) }}" alt="{{ $article->title }}" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
+                <img src="{{ $article->featured_image_url }}" alt="{{ $article->title }}" class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700">
             </div>
-            @endif
             
             <div class="p-6">
                 <div class="flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest text-pa-red mb-3">
@@ -31,7 +29,7 @@
                 </h3>
                 
                 <p class="text-slate-500 text-sm line-clamp-3 mb-4 leading-relaxed">
-                    {{ $article->excerpt }}
+                    {{ $article->excerpt ?: Str::limit(strip_tags($article->content), 120) }}
                 </p>
                 
             </div>

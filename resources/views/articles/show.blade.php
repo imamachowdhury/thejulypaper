@@ -8,15 +8,11 @@
     <meta property="og:description" content="{{ $article->excerpt }}">
     <meta property="og:url" content="{{ request()->fullUrl() }}">
     <meta property="og:type" content="article">
-    @if($article->featured_image)
-    <meta property="og:image" content="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}">
-    @endif
+    <meta property="og:image" content="{{ $article->featured_image_url }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $article->title }}">
     <meta name="twitter:description" content="{{ $article->excerpt }}">
-    @if($article->featured_image)
-    <meta name="twitter:image" content="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}">
-    @endif
+    <meta name="twitter:image" content="{{ $article->featured_image_url }}">
 @endsection
 
 @section('content')
@@ -59,11 +55,9 @@
                 </div>
             </div>
 
-            @if($article->featured_image)
             <figure class="mb-8 overflow-hidden rounded shadow-sm">
-                <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-auto">
+                <img src="{{ $article->featured_image_url }}" alt="{{ $article->title }}" class="w-full h-auto">
             </figure>
-            @endif
 
             <div class="prose prose-lg max-w-none text-slate-800 prose-pa-red">
                 {!! $article->content !!}
@@ -95,13 +89,9 @@
                             <h4 class="text-sm font-bold leading-snug group-hover:text-pa-red transition-colors">{{ $related->title }}</h4>
                             <span class="text-[10px] text-slate-400 font-bold uppercase mt-2 block">{{ $related->published_at ? toBangla($related->published_at->diffForHumans()) : '' }}</span>
                         </div>
-                        @if($related->featured_image)
                         <div class="w-16 h-16 bg-slate-100 rounded flex-shrink-0 overflow-hidden">
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($related->featured_image) }}" alt="{{ $related->title }}" class="w-full h-full object-cover">
+                            <img src="{{ $related->featured_image_url }}" alt="{{ $related->title }}" class="w-full h-full object-cover">
                         </div>
-                        @else
-                        <div class="w-16 h-16 bg-slate-100 rounded flex-shrink-0"></div>
-                        @endif
                     </div>
                     @endforeach
                 </div>
