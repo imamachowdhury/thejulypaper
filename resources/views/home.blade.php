@@ -242,14 +242,14 @@
                 </div>
 
                 <!-- Right Column (organism2) -->
-                <div class="lg:col-span-7 flex flex-col space-y-10 lg:pl-10 lg:border-l border-slate-100">
+                <div class="lg:col-span-7 flex flex-col space-y-10 lg:pl-12 lg:border-l border-slate-100">
                     <div class="organism2 space-y-10">
                         @foreach($opinionArticles->slice(1) as $article)
-                        <div class="opinion-story-card flex items-center space-x-6 group border-b border-slate-100/50 pb-8 last:border-0 last:pb-0">
+                        <div class="opinion-story-card flex items-start space-x-6 group border-b border-slate-100/50 pb-8 last:border-0 last:pb-0">
                             <!-- Image/Thumbnail -->
-                            <div class="flex-shrink-0">
+                            <div class="flex-shrink-0 pt-1">
                                 <a href="{{ route('articles.show', $article->slug) }}">
-                                    <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border border-slate-100 p-0.5 group-hover:border-pa-red transition-all duration-300">
+                                    <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border border-slate-200 p-0.5 group-hover:border-pa-red transition-all duration-300">
                                         @if($article->featured_image)
                                             <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover rounded-full">
                                         @else
@@ -263,17 +263,17 @@
                                 </a>
                             </div>
                             <!-- Text Content -->
-                            <div class="story-details flex-1 space-y-1">
-                                <h3 class="headline-title text-lg md:text-xl font-bold leading-[1.3] pa-headline text-slate-900 group-hover:text-pa-red transition-colors">
+                            <div class="story-details flex-1">
+                                <h3 class="headline-title text-xl md:text-2xl font-black leading-tight pa-headline text-slate-900 group-hover:text-pa-red transition-colors mb-3">
                                     <a href="{{ route('articles.show', $article->slug) }}" class="title-link">
-                                        <span class="text-pa-red font-black">মতামত •</span> {{ $article->title }}
+                                        <span class="text-pa-red font-black inline-block mr-1">মতামত •</span>{{ $article->title }}
                                     </a>
                                 </h3>
-                                <div class="MdYVB flex items-center space-x-2 text-xs">
-                                    <span class="contributor-name font-bold text-slate-700">{{ $article->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
+                                <div class="MdYVB flex items-center space-x-3 text-sm text-slate-500">
+                                    <span class="contributor-name font-bold text-slate-800">{{ $article->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
                                     @if($article->published_at)
                                     <span class="text-slate-300">•</span>
-                                    <span class="text-slate-400 font-bold uppercase">{{ toBangla($article->published_at->diffForHumans()) }}</span>
+                                    <span class="font-bold text-[11px] uppercase tracking-wide">{{ toBangla($article->published_at->diffForHumans()) }}</span>
                                     @endif
                                 </div>
                             </div>
