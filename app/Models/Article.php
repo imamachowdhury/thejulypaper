@@ -9,10 +9,27 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Media;
 
 class Article extends Model
 {
     use Sluggable, HasFactory;
+    
+    protected static function booted()
+    {
+        static::saved(function ($article) {
+            if ($article->featured_image && $article->wasChanged('featured_image')) {
+                Media::updateOrCreate(
+                    ['file_path' => $article->featured_image],
+                    [
+                        'user_id' => $article->user_id ?? auth()->id() ?? 1,
+                        'name' => basename($article->featured_image),
+                        'disk' => 'public',
+                    ]
+                );
+            }
+        });
+    }
 
     protected $fillable = [
         'title', 'slug', 'content', 'excerpt', 'featured_image',
