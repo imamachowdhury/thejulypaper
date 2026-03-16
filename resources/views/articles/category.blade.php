@@ -23,7 +23,7 @@
                 <div class="flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest text-pa-red mb-3">
                     <span>{{ $category->name }}</span>
                     <span class="w-1 h-1 bg-slate-200 rounded-full"></span>
-                    <span class="text-slate-400">{{ toBangla($article->published_at->isoFormat('D MMMM YYYY')) }}</span>
+                    <span class="text-slate-400">{{ $article->published_at ? toBangla($article->published_at->isoFormat('D MMMM YYYY')) : '' }}</span>
                 </div>
                 
                 <h3 class="text-xl font-black mb-4 leading-tight group-hover:text-pa-red transition-colors">
