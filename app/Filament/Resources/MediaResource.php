@@ -4,16 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MediaResource\Pages;
 use App\Models\Media;
-use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Set;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Tables;
-use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -63,12 +60,20 @@ class MediaResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('file_path')
                     ->label('Preview')
-                    ->square()
-                    ->size(80),
+                    ->height(120)
+                    ->width(180)
+                    ->openUrlInNewTab(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable()
                     ->wrap(),
+                Tables\Columns\TextColumn::make('url')
+                    ->label('Direct Link')
+                    ->default(fn ($record) => Storage::url($record->file_path))
+                    ->copyable()
+                    ->copyMessage('Link copied to clipboard')
+                    ->icon('heroicon-o-clipboard-document')
+                    ->color('primary'),
                 Tables\Columns\TextColumn::make('file_type')
                     ->label('Type')
                     ->badge()
@@ -85,8 +90,9 @@ class MediaResource extends Resource
                 //
             ])
             ->actions([
-                EditAction::make(),
-                DeleteAction::make()
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
                     ->after(function (Media $record) {
                         if ($record->file_path) {
                             Storage::disk($record->disk)->delete($record->file_path);
@@ -94,7 +100,7 @@ class MediaResource extends Resource
                     }),
             ])
             ->bulkActions([
-                DeleteBulkAction::make()
+                Tables\Actions\DeleteBulkAction::make()
                     ->after(function ($records) {
                         foreach ($records as $record) {
                             if ($record->file_path) {
