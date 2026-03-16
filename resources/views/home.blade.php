@@ -245,9 +245,9 @@
                 <div class="lg:col-span-7 flex flex-col space-y-10 lg:pl-12 lg:border-l border-slate-100">
                     <div class="organism2 space-y-10">
                         @foreach($opinionArticles->slice(1) as $article)
-                        <div class="opinion-story-card flex items-start space-x-6 group border-b border-slate-100/50 pb-8 last:border-0 last:pb-0">
+                        <div class="opinion-story-card flex items-center space-x-6 group border-b border-slate-100/50 pb-8 last:border-0 last:pb-0">
                             <!-- Image/Thumbnail -->
-                            <div class="flex-shrink-0 pt-1">
+                            <div class="flex-shrink-0">
                                 <a href="{{ route('articles.show', $article->slug) }}">
                                     <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border border-slate-200 p-0.5 group-hover:border-pa-red transition-all duration-300">
                                         @if($article->featured_image)
@@ -264,9 +264,9 @@
                             </div>
                             <!-- Text Content -->
                             <div class="story-details flex-1">
-                                <h3 class="headline-title text-xl md:text-2xl font-black leading-tight pa-headline text-slate-900 group-hover:text-pa-red transition-colors mb-3">
+                                <h3 class="headline-title text-xl md:text-2xl font-black leading-tight pa-headline text-slate-900 group-hover:text-pa-red transition-colors mb-2">
                                     <a href="{{ route('articles.show', $article->slug) }}" class="title-link">
-                                        <span class="text-pa-red font-black inline-block mr-1">মতামত •</span>{{ $article->title }}
+                                        <span class="tilte-no-link-parent"><span class="text-pa-red mr-1">মতামত •</span> {{ $article->title }}</span>
                                     </a>
                                 </h3>
                                 <div class="MdYVB flex items-center space-x-3 text-sm text-slate-500">
