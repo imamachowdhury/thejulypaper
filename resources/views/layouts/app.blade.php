@@ -226,7 +226,7 @@
 
         <!-- Footer -->
         <footer class="site-footer mt-20 p-0 overflow-hidden" style="background-color: #C0122B !important;">
-            <div class="text-white font-['Hind_Siliguri']">
+            <div class="pt-6 pb-5 text-white font-['Hind_Siliguri']">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Logo -->
                     <div class="mb-5 overflow-hidden">
@@ -236,13 +236,13 @@
                     </div>
 
                     <!-- Primary Menu -->
-                    <div class="flex flex-wrap mb-6 text-base font-bold">
-                        <a href="{{ url('/') }}" class="hover:underline transition-all">প্রচ্ছদ</a>
+                    <div class="flex flex-wrap gap-x-3 gap-y-2 mb-6 text-base font-bold">
+                        <a href="{{ url('/') }}" class="hover:underline transition-all pr-1 md:pr-2">প্রচ্ছদ</a>
                         @php 
                             $primaryMenus = \App\Models\MenuLink::where('location', 'primary')->orderBy('sort_order')->get();
                         @endphp
                         @foreach($primaryMenus as $menu)
-                            <a href="{{ $menu->computed_url }}" class="hover:underline transition-all pa-headline">{{ $menu->label }}</a>
+                            <a href="{{ $menu->computed_url }}" class="hover:underline transition-all pa-headline pr-1 md:pr-2">{{ $menu->label }}</a>
                         @endforeach
                     </div>
 
