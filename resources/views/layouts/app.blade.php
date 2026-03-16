@@ -20,7 +20,8 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}?v=1.1">
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}?v=1.1">
 
-    <title>@yield('title', 'দ্যা জুলাই পেপার - সত্যের সন্ধানে সার্বক্ষণিক')</title>
+    <title>@yield('title', 'দ্যা জুলাই পেপার - সত্যের সন্ধান ও নিরপেক্ষ খবর')</title>
+    <meta name="description" content="@yield('description', 'দ্যা জুলাই পেপার - বাংলার শীর্ষস্থানীয় অনলাইন নিউজ পোর্টাল। সত্যের সন্ধানে আমরা আপনার সাথে সার্বক্ষণিক।')">
     @yield('meta')
 
     <!-- Fonts -->
@@ -65,7 +66,9 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
                 <!-- Mobile: Left Hamburger -->
                 <div class="flex-1 flex items-center lg:hidden">
-                    <button @click="mobileMenuOpen = true" class="p-2 text-slate-600 hover:text-pa-red transition-colors">
+                    <button @click="mobileMenuOpen = true" 
+                            aria-label="Open Mobile Menu"
+                            class="p-2 text-slate-600 hover:text-pa-red transition-colors">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -82,8 +85,8 @@
                 <!-- Right: Desktop Search/Login | Mobile Search -->
                 <div class="flex-1 flex justify-end items-center space-x-2 md:space-x-4">
                     <form action="{{ route('search') }}" method="GET" class="relative hidden lg:block">
-                        <input type="text" name="q" value="{{ request('q') }}" placeholder="খুঁজুন..." class="bg-slate-100 border-none rounded-full py-2 px-6 text-sm focus:ring-2 focus:ring-pa-red transition-all w-64">
-                        <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-pa-red">
+                        <input type="text" name="q" value="{{ request('q') }}" aria-label="Search" placeholder="খুঁজুন..." class="bg-slate-100 border-none rounded-full py-2 px-6 text-sm focus:ring-2 focus:ring-pa-red transition-all w-64">
+                        <button type="submit" aria-label="Submit Search" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-pa-red">
                             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
@@ -139,8 +142,8 @@
                     <!-- Search inside mobile menu -->
                     <div class="mb-8">
                         <form action="{{ route('search') }}" method="GET" class="relative">
-                            <input type="text" name="q" value="{{ request('q') }}" placeholder="খুঁজুন..." class="w-full bg-slate-100 border-none rounded-xl py-3 px-5 text-sm focus:ring-2 focus:ring-pa-red">
-                            <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
+                            <input type="text" name="q" value="{{ request('q') }}" aria-label="Search Mobile" placeholder="খুঁজুন..." class="w-full bg-slate-100 border-none rounded-xl py-3 px-5 text-sm focus:ring-2 focus:ring-pa-red">
+                            <button type="submit" aria-label="Submit Search Mobile" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
                                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>

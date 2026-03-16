@@ -16,7 +16,10 @@
             <div class="group cursor-pointer" onclick="window.location='{{ route('articles.show', $featuredArticles[0]->slug) }}'">
                 @if($featuredArticles[0]->featured_image)
                 <div class="aspect-[16/10] overflow-hidden rounded bg-slate-100 mb-5 relative">
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($featuredArticles[0]->featured_image) }}" alt="{{ $featuredArticles[0]->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($featuredArticles[0]->featured_image) }}" 
+                         alt="{{ $featuredArticles[0]->title }}" 
+                         fetchpriority="high"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                 </div>
                 @endif
                 <div class="space-y-3">
@@ -51,7 +54,10 @@
             <div class="group cursor-pointer space-y-4" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
                 @if($article->featured_image)
                 <div class="aspect-video overflow-hidden rounded bg-slate-100">
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                         alt="{{ $article->title }}" 
+                         loading="lazy"
+                         class="w-full h-full object-cover">
                 </div>
                 @endif
                 <div class="space-y-3">
@@ -79,7 +85,10 @@
                     </div>
                     @if($article->featured_image)
                     <div class="w-20 h-14 flex-shrink-0 bg-slate-100 overflow-hidden rounded-sm">
-                        <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                             alt="{{ $article->title }}"
+                             loading="lazy"
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
                     @else
                     <div class="w-20 h-14 bg-slate-50 rounded-sm"></div>
@@ -112,7 +121,10 @@
             <div class="flex justify-center flex-shrink-0">
                 <div class="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-pa-red/10 p-1 group-hover:border-pa-red transition-all duration-500">
                     @if($article->featured_image)
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover rounded-full">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                         alt="{{ $article->title }}"
+                         loading="lazy"
+                         class="w-full h-full object-cover rounded-full">
                     @else
                     <div class="w-full h-full bg-slate-100 rounded-full"></div>
                     @endif
@@ -156,7 +168,10 @@
                         </div>
                         @if($article->featured_image)
                         <div class="w-20 h-20 md:w-24 md:h-16 flex-shrink-0 rounded-sm bg-slate-100 overflow-hidden">
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                                 alt="{{ $article->title }}"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
                         </div>
                         @endif
                     </div>
@@ -169,7 +184,10 @@
                     <div class="group cursor-pointer" onclick="window.location='{{ route('articles.show', $first->slug) }}'">
                         <div class="aspect-[16/10] overflow-hidden rounded-sm bg-slate-100 mb-6">
                             @if($first->featured_image)
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($first->featured_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($first->featured_image) }}" 
+                                 alt="{{ $first->title }}"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             @endif
                         </div>
                         <h4 class="text-2xl md:text-3xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">{{ $first->title }}</h4>
@@ -188,7 +206,10 @@
                         </div>
                         @if($article->featured_image)
                         <div class="w-20 h-20 md:w-24 md:h-16 flex-shrink-0 rounded-sm bg-slate-100 overflow-hidden">
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" 
+                                 alt="{{ $article->title }}"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover group-hover:opacity-90 transition-opacity">
                         </div>
                         @endif
                     </div>
