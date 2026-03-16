@@ -11,4 +11,6 @@ Route::get('/search', [ArticleController::class, 'search'])->name('search');
 
 Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])->name('page.show');
 
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index']);
+
 
