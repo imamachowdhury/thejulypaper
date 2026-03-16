@@ -230,13 +230,13 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Logo -->
                     <div class="mb-8 overflow-hidden">
-                        <a href="{{ url('/') }}" class="inline-block">
-                            <span class="text-3xl md:text-5xl font-black tracking-tighter text-white">দ্যা জুলাই <span class="text-white/90">পেপার</span></span>
+                        <a href="{{ url('/') }}" class="inline-block -ml-1 md:-ml-2">
+                            <span class="text-4xl md:text-5xl font-black tracking-tighter text-white">দ্যা জুলাই <span class="text-white/90">পেপার</span></span>
                         </a>
                     </div>
 
                     <!-- Primary Menu -->
-                    <div class="flex flex-wrap gap-x-6 gap-y-3 mb-8 text-base md:text-lg font-bold">
+                    <div class="flex flex-wrap gap-x-5 md:gap-x-7 gap-y-3 mb-10 text-base font-bold">
                         <a href="{{ url('/') }}" class="hover:underline transition-all">প্রচ্ছদ</a>
                         @php 
                             $primaryMenus = \App\Models\MenuLink::where('location', 'primary')->orderBy('sort_order')->get();
@@ -247,20 +247,20 @@
                     </div>
 
                     <!-- Thin Separator -->
-                    <hr class="border-white/20 mb-6">
+                    <hr class="border-white/30 mb-8">
 
                     <!-- Bottom Bar -->
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-[13px] md:text-sm text-white">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-sm text-white">
                         <!-- Copyright & Policy Links -->
-                        <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-                            <span class="font-medium">@ {{ toBangla(date('Y')) }} দ্যা জুলাই পেপার</span>
+                        <div class="flex flex-wrap items-center gap-x-2 md:gap-x-3 gap-y-2">
+                            <span class="font-medium whitespace-nowrap">@ {{ toBangla(date('Y')) }} দ্যা জুলাই পেপার</span>
                             
                             @php 
                                 $footerLinks = \App\Models\MenuLink::where('location', 'footer')->orderBy('sort_order')->get();
                             @endphp
                             @foreach($footerLinks as $link)
-                                <span class="text-white/40">|</span>
-                                <a href="{{ $link->computed_url }}" class="hover:underline transition-all">{{ $link->label }}</a>
+                                <span class="text-white/50 px-1">|</span>
+                                <a href="{{ $link->computed_url }}" class="hover:underline transition-all whitespace-nowrap">{{ $link->label }}</a>
                             @endforeach
                         </div>
 
