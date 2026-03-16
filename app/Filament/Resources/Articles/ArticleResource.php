@@ -74,6 +74,15 @@ class ArticleResource extends Resource
                                 Forms\Components\DateTimePicker::make('published_at')
                                     ->default(now()),
 
+                                Forms\Components\TextInput::make('source_name')
+                                    ->label('সূত্র (Reference)')
+                                    ->placeholder('যেমন: প্রথম আলো'),
+
+                                Forms\Components\TextInput::make('source_url')
+                                    ->label('সূত্রের লিংক (Reference URL)')
+                                    ->url()
+                                    ->placeholder('https://example.com/news'),
+
                                 Forms\Components\Toggle::make('is_featured'),
                             ]),
 

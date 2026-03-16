@@ -33,6 +33,16 @@
                 
                 <div class="flex flex-col md:flex-row md:items-center justify-between border-y py-4 gap-4">
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center space-x-4">
+                        @if($article->source_name)
+                        <span>সূত্র: 
+                            @if($article->source_url)
+                                <a href="{{ $article->source_url }}" target="_blank" class="text-pa-red hover:underline">{{ $article->source_name }}</a>
+                            @else
+                                {{ $article->source_name }}
+                            @endif
+                        </span>
+                        <span class="text-slate-200">|</span>
+                        @endif
                         <span>প্রকাশ: {{ $article->getBanglaDate() }}</span>
                     </div>
                     

@@ -68,7 +68,8 @@ class Article extends Model
     protected $fillable = [
         'title', 'slug', 'content', 'excerpt', 'featured_image',
         'status', 'published_at', 'user_id', 'category_id',
-        'meta_title', 'meta_description', 'is_featured', 'view_count'
+        'meta_title', 'meta_description', 'is_featured', 'view_count',
+        'source_name', 'source_url'
     ];
 
     protected $casts = [
