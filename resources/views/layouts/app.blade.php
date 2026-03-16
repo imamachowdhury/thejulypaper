@@ -226,17 +226,17 @@
 
         <!-- Footer -->
         <footer class="site-footer mt-20 p-0 overflow-hidden" style="background-color: #C0122B !important;">
-            <div class="pt-16 pb-10 text-white font-['Hind_Siliguri']">
+            <div class="text-white font-['Hind_Siliguri']">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Logo -->
-                    <div class="mb-8 overflow-hidden">
+                    <div class="mb-5 overflow-hidden">
                         <a href="{{ url('/') }}" class="inline-block -ml-1 md:-ml-2">
                             <span class="text-4xl md:text-5xl font-black tracking-tighter text-white">দ্যা জুলাই <span class="text-white/90">পেপার</span></span>
                         </a>
                     </div>
 
                     <!-- Primary Menu -->
-                    <div class="flex flex-wrap gap-x-5 md:gap-x-7 gap-y-3 mb-10 text-base font-bold">
+                    <div class="flex flex-wrap mb-6 text-base font-bold">
                         <a href="{{ url('/') }}" class="hover:underline transition-all">প্রচ্ছদ</a>
                         @php 
                             $primaryMenus = \App\Models\MenuLink::where('location', 'primary')->orderBy('sort_order')->get();
@@ -247,7 +247,7 @@
                     </div>
 
                     <!-- Thin Separator -->
-                    <hr class="border-white/30 mb-8">
+                    <hr class="border-white/30 mb-5">
 
                     <!-- Bottom Bar -->
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-sm text-white">
