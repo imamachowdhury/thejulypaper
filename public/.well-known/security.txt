@@ -1,0 +1,5 @@
+Contact: mailto:imamahmed007@gmail.com
+Expires: 2027-03-17T00:00:00.000Z
+Languages: bn, en
+Canonical: https://thejulypaper.com/.well-known/security.txt
+Policy: https://thejulypaper.com/privacy-policy
