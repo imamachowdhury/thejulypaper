@@ -11,10 +11,10 @@ use Filament\Forms;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Set;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -64,6 +64,7 @@ class MediaResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('file_path')
                     ->label('Preview')
+                    ->disk(fn ($record) => $record->disk ?? 'public')
                     ->height(120)
                     ->width(180)
                     ->openUrlInNewTab(),
@@ -73,7 +74,7 @@ class MediaResource extends Resource
                     ->wrap(),
                 Tables\Columns\TextColumn::make('url')
                     ->label('Direct Link')
-                    ->default(fn ($record) => Storage::url($record->file_path))
+                    ->getStateUsing(fn ($record) => Storage::disk($record->disk ?? 'public')->url($record->file_path))
                     ->copyable()
                     ->copyMessage('Link copied to clipboard')
                     ->icon('heroicon-o-clipboard-document')

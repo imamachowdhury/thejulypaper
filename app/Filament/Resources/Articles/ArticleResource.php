@@ -135,7 +135,8 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('featured_image'),
+                Tables\Columns\ImageColumn::make('featured_image')
+                    ->disk('public'),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
                     ->sortable(),
