@@ -92,6 +92,7 @@ class ArticleResource extends Resource
                             ->schema([
                                 Forms\Components\FileUpload::make('featured_image')
                                     ->image()
+                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                                     ->directory('articles'),
                             ]),
                     ])
