@@ -19,6 +19,33 @@ class Article extends Model
     {
         static::saved(function ($article) {
             if ($article->featured_image && $article->wasChanged('featured_image')) {
+                // Image Optimization Logic
+                try {
+                    $originalPath = $article->featured_image;
+                    $fullPath = storage_path('app/public/' . $originalPath);
+                    $extension = pathinfo($fullPath, PATHINFO_EXTENSION);
+                    
+                    if (file_exists($fullPath) && !in_array(strtolower($extension), ['webp', 'svg'])) {
+                        $manager = \Intervention\Image\ImageManager::gd();
+                        $image = $manager->read($fullPath);
+                        
+                        $newPath = 'articles/' . pathinfo($originalPath, PATHINFO_FILENAME) . '.webp';
+                        $image->toWebp(80)->save(storage_path('app/public/' . $newPath));
+                        
+                        // Update model without triggering more events
+                        $article->withoutEvents(function () use ($article, $newPath) {
+                            $article->update(['featured_image' => $newPath]);
+                        });
+                        
+                        // Delete old file
+                        if (file_exists($fullPath)) {
+                            unlink($fullPath);
+                        }
+                    }
+                } catch (\Exception $e) {
+                    \Illuminate\Support\Facades\Log::error('Image Optimization Error: ' . $e->getMessage());
+                }
+
                 Media::updateOrCreate(
                     ['file_path' => $article->featured_image],
                     [
