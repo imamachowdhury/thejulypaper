@@ -220,7 +220,7 @@
         </main>
 
         <!-- Footer -->
-        <footer class="bg-[#C0122B] pt-16 pb-10 mt-20 text-white font-['Hind_Siliguri']">
+        <footer class="pt-16 pb-10 mt-20 text-white font-['Hind_Siliguri']" style="background-color: #C0122B !important;">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Logo -->
                 <div class="mb-8 overflow-hidden">
