@@ -223,7 +223,7 @@
                             <h3 class="headline-title text-2xl md:text-3xl font-black pa-headline leading-relaxed">
                                 <a href="{{ route('articles.show', $pLead->slug) }}" class="title-link">
                                     <span class="opinion-highlighter">
-                                        <span class="opinion-sub-title">মতামত</span>{{ $pLead->title }}
+                                        <span class="opinion-sub-title">মতামত •</span>{{ $pLead->title }}
                                     </span>
                                 </a>
                             </h3>
@@ -245,7 +245,7 @@
                 <div class="lg:col-span-7 flex flex-col space-y-10 lg:pl-10 lg:border-l border-slate-100">
                     <div class="organism2 space-y-10">
                         @foreach($opinionArticles->slice(1) as $article)
-                        <div class="opinion-story-card flex items-start space-x-6 group">
+                        <div class="opinion-story-card flex items-center space-x-6 group border-b border-slate-100/50 pb-8 last:border-0 last:pb-0">
                             <!-- Image/Thumbnail -->
                             <div class="flex-shrink-0">
                                 <a href="{{ route('articles.show', $article->slug) }}">
@@ -263,17 +263,17 @@
                                 </a>
                             </div>
                             <!-- Text Content -->
-                            <div class="story-details flex-1 space-y-2">
-                                <h3 class="headline-title text-base md:text-xl font-black leading-snug group-hover:text-pa-red transition-colors pa-headline">
+                            <div class="story-details flex-1 space-y-1">
+                                <h3 class="headline-title text-lg md:text-xl font-bold leading-[1.3] pa-headline text-slate-900 group-hover:text-pa-red transition-colors">
                                     <a href="{{ route('articles.show', $article->slug) }}" class="title-link">
-                                        <span class="text-pa-red mr-2 font-black">মতামত</span>{{ $article->title }}
+                                        <span class="text-pa-red font-black">মতামত •</span> {{ $article->title }}
                                     </a>
                                 </h3>
                                 <div class="MdYVB flex items-center space-x-2 text-xs">
                                     <span class="contributor-name font-bold text-slate-700">{{ $article->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
                                     @if($article->published_at)
                                     <span class="text-slate-300">•</span>
-                                    <span class="text-slate-400 font-bold">{{ toBangla($article->published_at->diffForHumans()) }}</span>
+                                    <span class="text-slate-400 font-bold uppercase">{{ toBangla($article->published_at->diffForHumans()) }}</span>
                                     @endif
                                 </div>
                             </div>
