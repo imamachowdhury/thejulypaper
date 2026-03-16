@@ -172,7 +172,8 @@ class ArticleResource extends Resource
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),
-            ]);
+            ])
+            ->defaultSort('published_at', 'desc');
     }
 
     public static function getRelations(): array
