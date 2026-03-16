@@ -128,7 +128,6 @@
         @endforeach
     </div>
     @endif
-    @endif
 
 
     <!-- Segment: Category Based Sections -->
@@ -198,6 +197,6 @@
             @endif
         </div>
         @endforeach
-    @endif
+    </div>
 </div>
 @endsection
