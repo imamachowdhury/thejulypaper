@@ -17,6 +17,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+
     <title>@yield('title', 'দ্যা জুলাই পেপার - সত্যের সন্ধানে সার্বক্ষণিক')</title>
     @yield('meta')
 
