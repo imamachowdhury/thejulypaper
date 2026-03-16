@@ -50,6 +50,17 @@
             color: white !important;
             display: block !important;
         }
+        .footer-padding {
+            padding-top: 4rem !important; /* pt-16 equivalent */
+            padding-bottom: 2.5rem !important; /* pb-10 equivalent */
+        }
+        .footer-menu-gap {
+            gap: 1.5rem 1rem !important; /* Row gap and Column gap */
+        }
+        .footer-menu-gap > a {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
     </style>
 </head>
 <body class="antialiased bg-white text-slate-900 selection:bg-pa-red selection:text-white transition-colors duration-300">
@@ -226,23 +237,23 @@
 
         <!-- Footer -->
         <footer class="site-footer mt-20 p-0 overflow-hidden" style="background-color: #C0122B !important;">
-            <div class="pt-6 pb-5 text-white font-['Hind_Siliguri']">
+            <div class="footer-padding text-white font-['Hind_Siliguri']">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Logo -->
-                    <div class="mb-5 overflow-hidden">
+                    <div class="mb-8 overflow-hidden">
                         <a href="{{ url('/') }}" class="inline-block -ml-1 md:-ml-2">
                             <span class="text-4xl md:text-5xl font-black tracking-tighter text-white">দ্যা জুলাই <span class="text-white/90">পেপার</span></span>
                         </a>
                     </div>
 
                     <!-- Primary Menu -->
-                    <div class="flex flex-wrap gap-x-3 gap-y-2 mb-6 text-base font-bold">
-                        <a href="{{ url('/') }}" class="hover:underline transition-all pr-1 md:pr-2">প্রচ্ছদ</a>
+                    <div class="flex flex-wrap footer-menu-gap mb-10 text-base font-bold">
+                        <a href="{{ url('/') }}" class="hover:underline transition-all">প্রচ্ছদ</a>
                         @php 
                             $primaryMenus = \App\Models\MenuLink::where('location', 'primary')->orderBy('sort_order')->get();
                         @endphp
                         @foreach($primaryMenus as $menu)
-                            <a href="{{ $menu->computed_url }}" class="hover:underline transition-all pa-headline pr-1 md:pr-2">{{ $menu->label }}</a>
+                            <a href="{{ $menu->computed_url }}" class="hover:underline transition-all pa-headline">{{ $menu->label }}</a>
                         @endforeach
                     </div>
 
