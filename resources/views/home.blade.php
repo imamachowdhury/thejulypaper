@@ -200,73 +200,65 @@
         @endforeach
     <!-- Segment: Opinion (মতামত) Section -->
     @if($opinionCategory && $opinionArticles->isNotEmpty())
-    <div class="py-16 border-t mt-12 bg-slate-50/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center space-x-2 mb-10 group cursor-pointer" onclick="window.location='{{ route('category.show', $opinionCategory->slug) }}'">
-                <h3 class="text-2xl font-black text-slate-900 pa-headline">{{ $opinionCategory->name }}</h3>
-                <svg class="h-5 w-5 text-pa-red group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
-                </svg>
+    <div class="py-12 border-t mt-12">
+        <div class="flex items-center space-x-2 mb-10 group cursor-pointer" onclick="window.location='{{ route('category.show', $opinionCategory->slug) }}'">
+            <h3 class="text-2xl font-black text-slate-900 pa-headline">{{ $opinionCategory->name }}</h3>
+            <svg class="h-5 w-5 text-pa-red group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- Left: Featured Opinion -->
+            @php $pLead = $opinionArticles->first(); @endphp
+            <div class="lg:col-span-4 rounded-sm border border-slate-200 p-8 flex flex-col justify-between bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="window.location='{{ route('articles.show', $pLead->slug) }}'">
+                <div>
+                    <div class="mb-8 font-black">
+                        <h4 class="inline text-xl md:text-2xl leading-relaxed pa-headline bg-[#001D4A] text-white py-1.5 px-3 [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
+                            <span class="text-[#FFB82B]">মতামত •</span> {{ $pLead->title }}
+                        </h4>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed line-clamp-4 px-2">
+                        {{ $pLead->excerpt }}
+                    </p>
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-slate-100">
+                    <div class="space-y-1">
+                        <span class="block text-[10px] uppercase font-black text-slate-400 tracking-widest">মতামত লিখেছেন</span>
+                        <span class="block text-sm font-bold text-slate-800">{{ $pLead->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <!-- Left: Featured Opinion -->
-                @php $pLead = $opinionArticles->first(); @endphp
-                <div class="lg:col-span-4 rounded-lg border border-slate-200 p-8 flex flex-col justify-between bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-lg transition-all duration-300 cursor-pointer group/box" onclick="window.location='{{ route('articles.show', $pLead->slug) }}'">
-                    <div>
-                        <div class="mb-8">
-                            <h4 class="text-xl md:text-2xl font-black leading-[1.6] pa-headline">
-                                <span class="bg-[#001D4A] text-white py-1 px-0 shadow-[10px_0_0_#001D4A,-10px_0_0_#001D4A] [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
-                                    <span class="text-[#FFD700]">মতামত •</span> {{ $pLead->title }}
-                                </span>
-                            </h4>
-                        </div>
-                        <p class="text-slate-500 text-sm leading-relaxed line-clamp-4 pl-4 border-l-2 border-slate-100 italic">
-                            {{ $pLead->excerpt }}
-                        </p>
-                    </div>
-                    
-                    <div class="mt-10 pt-6 border-t border-slate-100 flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-2 h-2 rounded-full bg-pa-red"></div>
-                            <div class="space-y-0.5">
-                                <span class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">মতামত লিখেছেন</span>
-                                <span class="block text-sm font-black text-slate-900 group-hover/box:text-pa-red transition-colors">{{ $pLead->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
+            <!-- Right: Opinion List -->
+            <div class="lg:col-span-8 space-y-8">
+                @foreach($opinionArticles->slice(1) as $article)
+                <div class="group flex items-center space-x-6 cursor-pointer border-b border-slate-50 pb-8 last:border-0 last:pb-0" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
+                    <div class="flex-shrink-0">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-slate-100 p-1 group-hover:border-pa-red transition-all duration-500">
+                            @if($article->featured_image)
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover rounded-full">
+                            @else
+                            <div class="w-full h-full bg-slate-100 rounded-full flex items-center justify-center">
+                                <svg class="w-8 h-8 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                </svg>
                             </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="flex-1 space-y-2">
+                        <h4 class="text-base md:text-lg font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">
+                            <span class="text-pa-red">মতামত •</span> {{ $article->title }}
+                        </h4>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-bold text-slate-700">{{ $article->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
+                            <span class="text-[10px] text-slate-400 font-bold uppercase mt-1">{{ $article->published_at ? toBangla($article->published_at->diffForHumans()) : '' }}</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Right: Opinion List -->
-                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-1 gap-y-10">
-                    @foreach($opinionArticles->slice(1) as $article)
-                    <div class="group flex items-center space-x-8 cursor-pointer border-b border-slate-100 pb-10 last:border-0 last:pb-0" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
-                        <div class="flex-shrink-0 relative">
-                            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-4 border-white shadow-md group-hover:scale-110 transition-transform duration-500 z-10 relative">
-                                @if($article->featured_image)
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover">
-                                @else
-                                <div class="w-full h-full bg-slate-50 flex items-center justify-center">
-                                    <svg class="w-8 h-8 text-slate-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                    </svg>
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="flex-1 space-y-2">
-                            <h4 class="text-lg md:text-xl font-bold leading-snug group-hover:text-pa-red transition-colors pa-headline">
-                                <span class="text-pa-red/80 font-black">মতামত •</span> {{ $article->title }}
-                            </h4>
-                            <div class="flex items-center space-x-3">
-                                <span class="text-sm font-bold text-slate-800">{{ $article->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
-                                <span class="w-1 h-1 rounded-full bg-slate-300"></span>
-                                <span class="text-[11px] text-slate-400 font-bold uppercase">{{ $article->published_at ? toBangla($article->published_at->diffForHumans()) : '' }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
