@@ -220,56 +220,65 @@
         </main>
 
         <!-- Footer -->
-        <footer class="bg-slate-900 pt-20 pb-12 mt-20 text-white">
+        <footer class="bg-pa-red pt-16 pb-12 mt-20 text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-16">
-                    <div class="col-span-1 md:col-span-1">
-                        <a href="{{ url('/') }}" class="block mb-6">
-                            <span class="text-3xl font-black tracking-tighter text-pa-red">দ্যা জুলাই<span class="text-white">পেপার</span></span>
-                        </a>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            আধুনিক বিশ্বের জন্য স্বতন্ত্র সাংবাদিকতা। জুলাই পেপার (The July Paper) সরবরাহ করে উচ্চমানের অনুসন্ধানী প্রতিবেদন।
-                        </p>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-black uppercase tracking-widest text-pa-red mb-6">বিভাগসমূহ</h4>
-                        @php 
-                            $footerCategories = \App\Models\MenuLink::where('location', 'footer')->where('type', 'category')->orderBy('sort_order')->take(4)->get();
-                        @endphp
-                        <ul class="space-y-3">
-                            @foreach($footerCategories as $menu)
-                            <li><a href="{{ $menu->computed_url }}" class="text-slate-400 hover:text-white transition-colors text-sm">{{ $menu->label }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-black uppercase tracking-widest text-pa-red mb-6">প্রতিষ্ঠান</h4>
-                        @php 
-                            $footerPages = \App\Models\MenuLink::where('location', 'footer')->where('type', 'page')->orderBy('sort_order')->get();
-                        @endphp
-                        <ul class="space-y-3">
-                            @foreach($footerPages as $menu)
-                            <li><a href="{{ $menu->computed_url }}" class="text-slate-400 hover:text-white transition-colors text-sm">{{ $menu->label }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-black uppercase tracking-widest text-pa-red mb-6">আইনি তথ্য</h4>
-                        <ul class="space-y-3">
-                            <li><a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">গোপনীয়তা নীতি</a></li>
-                            <li><a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">ব্যবহারের শর্তাবলী</a></li>
-                            <li><a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">কুকি নীতি</a></li>
-                        </ul>
-                    </div>
+                <!-- Logo -->
+                <div class="mb-8">
+                    <a href="{{ url('/') }}" class="inline-block">
+                        <span class="text-3xl md:text-4xl font-black tracking-tighter text-white">দ্যা জুলাই<span class="text-white/80">পেপার</span></span>
+                    </a>
                 </div>
-                <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p class="text-slate-500 text-xs">
-                        &copy; {{ toBangla(date('Y')) }} দ্যা জুলাই পেপার। স্বতন্ত্র সাংবাদিকতা।
-                    </p>
-                    <div class="flex space-x-6 text-slate-500">
-                        <a href="#" class="hover:text-white transition-colors">ফেসবুক</a>
-                        <a href="#" class="hover:text-white transition-colors">টুইটার</a>
-                        <a href="#" class="hover:text-white transition-colors">ইনস্টাগ্রাম</a>
+
+                <!-- Row 1: Primary Categories -->
+                <div class="flex flex-wrap gap-x-8 gap-y-3 mb-10 text-sm md:text-base font-bold">
+                    <a href="{{ url('/') }}" class="hover:text-white/80 transition-colors">প্রচ্ছদ</a>
+                    @php 
+                        $primaryMenus = \App\Models\MenuLink::where('location', 'primary')->orderBy('sort_order')->get();
+                    @endphp
+                    @foreach($primaryMenus as $menu)
+                        <a href="{{ $menu->computed_url }}" class="hover:text-white/80 transition-colors pa-headline">{{ $menu->label }}</a>
+                    @endforeach
+                </div>
+
+                <!-- Separator -->
+                <hr class="border-white/20 mb-8">
+
+                <!-- Bottom Row -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                    <!-- Left: Copyright and Legal -->
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 text-[13px] font-medium text-white/90">
+                        <span>&copy; {{ toBangla(date('Y')) }} দ্যা জুলাই পেপার</span>
+                        
+                        @php 
+                            $footerLinks = \App\Models\MenuLink::where('location', 'footer')->orderBy('sort_order')->get();
+                        @endphp
+                        @foreach($footerLinks as $link)
+                            <span class="hidden md:inline text-white/30">|</span>
+                            <a href="{{ $link->computed_url }}" class="hover:text-white transition-colors">{{ $link->label }}</a>
+                        @endforeach
+                    </div>
+
+                    <!-- Right: Social Media -->
+                    <div class="flex items-center space-x-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-white/80">আমাদের অনুসরণ করুন:</span>
+                        <div class="flex items-center space-x-3">
+                            <!-- Facebook -->
+                            <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white text-pa-red transition-all">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                            <!-- YouTube -->
+                            <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white text-pa-red transition-all">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 4-8 4z"/></svg>
+                            </a>
+                            <!-- X (Twitter) -->
+                            <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white text-pa-red transition-all">
+                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                            </a>
+                            <!-- Instagram -->
+                            <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white text-pa-red transition-all">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
