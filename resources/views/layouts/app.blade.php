@@ -44,21 +44,6 @@
         .border-pa-red { border-color: #EE1C24; }
         .bg-pa-red { background-color: #EE1C24; }
         .text-pa-red { color: #EE1C24; }
-        
-        .opinion-highlighter {
-            background-color: #001D4A;
-            color: #ffffff;
-            padding: 4px 8px;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-            display: inline;
-            line-height: 1.6;
-        }
-        .opinion-sub-title {
-            color: #FFB82B !important;
-            font-weight: 900;
-            margin-right: 8px;
-        }
     </style>
 </head>
 <body class="antialiased bg-white text-slate-900 selection:bg-pa-red selection:text-white transition-colors duration-300">
