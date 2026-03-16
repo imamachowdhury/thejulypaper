@@ -74,7 +74,7 @@
                         {!! $article->custom_css !!}
                     </style>
                 @endif
-                <div class="mb-8">
+                <div class="mb-8 prose prose-lg max-w-none text-slate-800 prose-pa-red">
                     {!! $article->content !!}
                 </div>
             @else
