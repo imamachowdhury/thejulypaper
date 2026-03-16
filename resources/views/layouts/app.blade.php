@@ -220,18 +220,18 @@
         </main>
 
         <!-- Footer -->
-        <footer class="bg-pa-red pt-16 pb-12 mt-20 text-white">
+        <footer class="bg-pa-red pt-24 pb-12 mt-32 text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Logo -->
-                <div class="mb-12">
-                    <a href="{{ url('/') }}" class="inline-block">
+                <div class="mb-14 flex justify-center lg:justify-start">
+                    <a href="{{ url('/') }}" class="inline-block text-center lg:text-left">
                         <span class="text-4xl md:text-6xl font-black tracking-tighter text-white">দ্যা জুলাই <span class="text-white/80">পেপার</span></span>
                     </a>
                 </div>
 
                 <!-- Row 1: Primary Categories -->
                 <div class="mb-12">
-                    <div class="flex flex-wrap items-center gap-y-4 -mx-4">
+                    <div class="flex flex-wrap justify-center lg:justify-start items-center gap-y-4 -mx-4">
                         <a href="{{ url('/') }}" class="px-4 text-lg md:text-xl font-bold hover:text-white/80 transition-colors border-r border-white/20 last:border-0 leading-none">প্রচ্ছদ</a>
                         @php 
                             $primaryMenus = \App\Models\MenuLink::where('location', 'primary')->orderBy('sort_order')->get();
