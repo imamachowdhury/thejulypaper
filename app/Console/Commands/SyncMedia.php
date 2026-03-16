@@ -31,8 +31,8 @@ class SyncMedia extends Command
                         'user_id' => 1, // Default to first user or admin
                         'name' => basename($file),
                         'file_path' => $file,
-                        'file_type' => Storage::disk('public')->mimeType($file),
-                        'file_size' => Storage::disk('public')->size($file),
+                        'file_type' => Storage::mimeType($file),
+                        'file_size' => Storage::size($file),
                         'disk' => 'public',
                     ]);
                     $count++;

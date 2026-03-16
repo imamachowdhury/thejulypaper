@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Page extends Model
 {
-    use Sluggable;
+    use Sluggable, \App\Traits\PurgesCloudflareCache;
 
     protected $fillable = ['title', 'slug', 'content', 'status'];
 

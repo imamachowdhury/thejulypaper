@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
-    use Sluggable;
+    use Sluggable, \App\Traits\PurgesCloudflareCache;
 
     protected $fillable = ['name', 'slug'];
 

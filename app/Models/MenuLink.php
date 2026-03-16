@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MenuLink extends Model
 {
+    use \App\Traits\PurgesCloudflareCache;
     protected $fillable = [
         'label', 
         'url', 

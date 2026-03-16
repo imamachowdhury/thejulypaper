@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'cloudflare' => [
+        'zone_id' => env('CLOUDFLARE_ZONE_ID'),
+        'api_key' => env('CLOUDFLARE_API_KEY'),
+        'email' => env('CLOUDFLARE_EMAIL'),
+    ],
+
 ];

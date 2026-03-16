@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Media;
+use App\Services\CloudflareService;
 
 class Article extends Model
 {
-    use Sluggable, HasFactory;
+    use Sluggable, HasFactory, \App\Traits\PurgesCloudflareCache;
     
     protected static function booted()
     {

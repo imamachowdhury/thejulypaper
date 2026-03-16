@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
-    use Sluggable;
+    use Sluggable, \App\Traits\PurgesCloudflareCache;
 
     protected $fillable = ['name', 'slug', 'description', 'is_homepage'];
 
