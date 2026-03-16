@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -8,5 +9,5 @@
 @theme {
     --font-sans: 'Outfit', 'Hind Siliguri', ui-sans-serif, system-ui, sans-serif;
     --font-serif: 'Playfair Display', 'Hind Siliguri', serif;
-    --color-pa-red: #EE1C24;
+    --color-pa-red: #C0122B;
 }
