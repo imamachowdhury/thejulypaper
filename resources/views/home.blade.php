@@ -28,7 +28,7 @@
                         {{ $featuredArticles[0]->title }}
                     </h1>
                     <p class="text-slate-600 text-base line-clamp-3 leading-relaxed">
-                        {{ $featuredArticles[0]->excerpt }}
+                        {{ $featuredArticles[0]->excerpt ?: Str::limit(strip_tags($featuredArticles[0]->content), 150) }}
                     </p>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                         {{ $article->title }}
                     </h3>
                     <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed">
-                        {{ $article->excerpt }}
+                        {{ $article->excerpt ?: Str::limit(strip_tags($article->content), 100) }}
                     </p>
                 </div>
                 @endforeach
@@ -65,7 +65,7 @@
                         {{ $article->title }}
                     </h2>
                     <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed">
-                        {{ $article->excerpt }}
+                        {{ $article->excerpt ?: Str::limit(strip_tags($article->content), 120) }}
                     </p>
                 </div>
             </div>
@@ -191,7 +191,7 @@
                             @endif
                         </div>
                         <h4 class="text-2xl md:text-3xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">{{ $first->title }}</h4>
-                        <p class="mt-4 text-slate-600 text-sm md:text-base line-clamp-3 leading-relaxed">{{ $first->excerpt }}</p>
+                        <p class="mt-4 text-slate-600 text-sm md:text-base line-clamp-3 leading-relaxed">{{ $first->excerpt ?: Str::limit(strip_tags($first->content), 150) }}</p>
                         <span class="mt-4 block text-xs text-slate-400 font-bold uppercase">{{ $first->published_at ? toBangla($first->published_at->diffForHumans()) : '' }}</span>
                     </div>
                 </div>
