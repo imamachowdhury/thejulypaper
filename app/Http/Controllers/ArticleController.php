@@ -29,7 +29,10 @@ class ArticleController extends Controller
             ->take(5)
             ->get();
 
-        $homepageCategories = \App\Models\Category::where('is_homepage', true)->take(6)->get();
+        $homepageCategories = \App\Models\Category::where('is_homepage', true)
+            ->where('name', '!=', 'মতামত')
+            ->take(6)
+            ->get();
         
         foreach($homepageCategories as $category) {
             $category->homepageArticles = $category->articles()
@@ -39,7 +42,14 @@ class ArticleController extends Controller
                 ->get();
         }
 
-        return view('home', compact('featuredArticles', 'latestArticles', 'mostReadArticles', 'homepageCategories'));
+        $opinionCategory = \App\Models\Category::where('name', 'মতামত')->first();
+        $opinionArticles = $opinionCategory ? $opinionCategory->articles()
+            ->where('status', 'published')
+            ->latest('published_at')
+            ->take(5)
+            ->get() : collect();
+
+        return view('home', compact('featuredArticles', 'latestArticles', 'mostReadArticles', 'homepageCategories', 'opinionCategory', 'opinionArticles'));
     }
 
     public function show(string $slug)

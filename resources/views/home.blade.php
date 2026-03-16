@@ -130,6 +130,73 @@
     @endif
     @endif
 
+    <!-- Segment: Opinion (মতামত) Section -->
+    @if($opinionCategory && $opinionArticles->isNotEmpty())
+    <div class="py-12">
+        <div class="flex items-center space-x-2 mb-8 group cursor-pointer" onclick="window.location='{{ route('category.show', $opinionCategory->slug) }}'">
+            <h3 class="text-2xl font-black text-slate-900 pa-headline">{{ $opinionCategory->name }}</h3>
+            <svg class="h-5 w-5 text-pa-red group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- Left: Featured Opinion -->
+            @php $pLead = $opinionArticles->first(); @endphp
+            <div class="lg:col-span-4 rounded-sm border border-slate-200 p-8 flex flex-col justify-between bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer" onclick="window.location='{{ route('articles.show', $pLead->slug) }}'">
+                <div>
+                    <div class="mb-6">
+                        <h4 class="inline-block bg-[#001D4A] text-white px-2 py-1 text-xl md:text-2xl font-black leading-snug pa-headline">
+                            <span class="text-[#FFB82B]">মতামত •</span> {{ $pLead->title }}
+                        </h4>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed line-clamp-4">
+                        {{ $pLead->excerpt }}
+                    </p>
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+                    <div class="space-y-1">
+                        <span class="block text-[10px] uppercase font-black text-slate-400 tracking-widest">লেখা:</span>
+                        <span class="block text-sm font-bold text-slate-800">{{ $pLead->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
+                    </div>
+                    <div class="w-10 h-1 bg-slate-200 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Right: Opinion List -->
+            <div class="lg:col-span-8 space-y-8">
+                @foreach($opinionArticles->slice(1) as $article)
+                <div class="group flex items-start space-x-6 cursor-pointer border-b border-slate-50 pb-8 last:border-0 last:pb-0" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
+                    <div class="flex-shrink-0">
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-slate-100 p-1 group-hover:border-pa-red transition-all duration-500">
+                            @if($article->featured_image)
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover rounded-full">
+                            @else
+                            <div class="w-full h-full bg-slate-100 rounded-full flex items-center justify-center">
+                                <svg class="w-8 h-8 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                </svg>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="flex-1 space-y-2">
+                        <h4 class="text-base md:text-lg font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">
+                            <span class="text-pa-red">মতামত •</span> {{ $article->title }}
+                        </h4>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-bold text-slate-700">{{ $article->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
+                            <span class="text-[10px] text-slate-400 font-bold uppercase mt-1">{{ toBangla($article->published_at->diffForHumans()) }}</span>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    @endif
+
     <!-- Segment: Category Based Sections -->
     <div class="py-12 space-y-16">
         @foreach($homepageCategories as $category)
