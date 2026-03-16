@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Log;
 
 class CloudflareService
 {
-    protected string $zoneId;
-    protected string $apiKey;
-    protected string $email;
+    protected ?string $zoneId;
+    protected ?string $apiKey;
+    protected ?string $email;
 
     public function __construct()
     {
