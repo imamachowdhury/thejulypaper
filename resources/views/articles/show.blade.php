@@ -37,7 +37,7 @@
                 
                 <div class="flex flex-col md:flex-row md:items-center justify-between border-y py-4 gap-4">
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center space-x-4">
-                        <span>আপডেট: {{ \Carbon\Carbon::parse($article->published_at)->isoFormat('LLLL') }}</span>
+                        <span>প্রকাশ: {{ $article->getBanglaDate() }}</span>
                     </div>
                     
                     <!-- Social Share -->
@@ -93,7 +93,7 @@
                     <div class="group cursor-pointer flex space-x-4 border-b pb-4 last:border-0" onclick="window.location='{{ route('articles.show', $related->slug) }}'">
                         <div class="flex-1">
                             <h4 class="text-sm font-bold leading-snug group-hover:text-pa-red transition-colors">{{ $related->title }}</h4>
-                            <span class="text-[10px] text-slate-400 font-bold uppercase mt-2 block">{{ $related->published_at->diffForHumans() }}</span>
+                            <span class="text-[10px] text-slate-400 font-bold uppercase mt-2 block">{{ toBangla($related->published_at->diffForHumans()) }}</span>
                         </div>
                         @if($related->featured_image)
                         <div class="w-16 h-16 bg-slate-100 rounded flex-shrink-0 overflow-hidden">

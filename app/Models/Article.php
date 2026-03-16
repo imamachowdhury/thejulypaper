@@ -71,4 +71,19 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * Get published date in Bangla format: মার্চ ১৬, ২০২৬, ১৩:২৫
+     */
+    public function getBanglaDate()
+    {
+        if (!$this->published_at) return '';
+        
+        $date = $this->published_at->locale('bn')->isoFormat('MMMM D, YYYY, HH:mm');
+        
+        $search = ['0','1','2','3','4','5','6','7','8','9'];
+        $replace = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        
+        return str_replace($search, $replace, $date);
+    }
 }

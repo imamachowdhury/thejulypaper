@@ -1,6 +1,14 @@
 @php 
     use Carbon\Carbon;
     Carbon::setLocale('bn');
+
+    if (!function_exists('toBangla')) {
+        function toBangla($number) {
+            $search = ['0','1','2','3','4','5','6','7','8','9'];
+            $replace = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+            return str_replace($search, $replace, $number);
+        }
+    }
 @endphp
 <!DOCTYPE html>
 <html lang="bn" class="scroll-smooth">
@@ -44,7 +52,7 @@
                     <a href="#" class="hover:text-pa-red transition-colors">সংস্করণ: বাংলা</a>
                 </div>
                 <div class="flex space-x-6 items-center">
-                    <span>{{ Carbon::now()->isoFormat('dddd, D MMMM YYYY') }}</span>
+                    <span>{{ toBangla(Carbon::now()->isoFormat('dddd, D MMMM YYYY')) }}</span>
                 </div>
             </div>
         </div>
@@ -165,7 +173,7 @@
                 </div>
 
                 <div class="p-6 bg-slate-50 border-t flex items-center justify-end">
-                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{{ Carbon::now()->isoFormat('D MMMM YYYY') }}</p>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{{ toBangla(Carbon::now()->isoFormat('D MMMM YYYY')) }}</p>
                 </div>
             </div>
         </div>
@@ -250,7 +258,7 @@
                 </div>
                 <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p class="text-slate-500 text-xs">
-                        &copy; {{ date('Y') }} দ্যা জুলাই পেপার। স্বতন্ত্র সাংবাদিকতা।
+                        &copy; {{ toBangla(date('Y')) }} দ্যা জুলাই পেপার। স্বতন্ত্র সাংবাদিকতা।
                     </p>
                     <div class="flex space-x-6 text-slate-500">
                         <a href="#" class="hover:text-white transition-colors">ফেসবুক</a>
