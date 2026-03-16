@@ -1,6 +1,5 @@
 @php 
     use Carbon\Carbon;
-    Carbon::setLocale('bn');
 @endphp
 <!DOCTYPE html>
 <html lang="bn" class="scroll-smooth">
