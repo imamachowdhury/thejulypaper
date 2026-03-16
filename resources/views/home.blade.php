@@ -91,8 +91,23 @@
     </div>
 
     <!-- Circular Bottom Row -->
+    @php 
+        $rowArticles = $featuredArticles->slice(11, 4);
+        if ($rowArticles->count() < 4) {
+            $alreadyUsedIds = $featuredArticles->pluck('id')->toArray();
+            $fillCount = 4 - $rowArticles->count();
+            $fillers = \App\Models\Article::where('status', 'published')
+                ->whereNotIn('id', $alreadyUsedIds)
+                ->latest('published_at')
+                ->take($fillCount)
+                ->get();
+            $rowArticles = $rowArticles->concat($fillers);
+        }
+    @endphp
+
+    @if($rowArticles->isNotEmpty())
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b pb-12 pt-12">
-        @foreach($featuredArticles->slice(11, 4) as $article)
+        @foreach($rowArticles as $article)
         <div class="group cursor-pointer space-y-5" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
             <div class="flex justify-center flex-shrink-0">
                 <div class="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-pa-red/10 p-1 group-hover:border-pa-red transition-all duration-500">
@@ -112,6 +127,7 @@
         </div>
         @endforeach
     </div>
+    @endif
     @endif
 
     <!-- Segment: Category Based Sections -->
