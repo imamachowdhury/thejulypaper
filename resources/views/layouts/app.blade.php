@@ -45,6 +45,9 @@
         .border-pa-red { border-color: #EE1C24; }
         .bg-pa-red { background-color: #EE1C24; }
         .text-pa-red { color: #EE1C24; }
+        .site-footer {
+            background-color: #C0122B !important;
+        }
     </style>
 </head>
 <body class="antialiased bg-white text-slate-900 selection:bg-pa-red selection:text-white transition-colors duration-300">
@@ -220,7 +223,7 @@
         </main>
 
         <!-- Footer -->
-        <footer class="pt-16 pb-10 mt-20 text-white font-['Hind_Siliguri']" style="background-color: #C0122B !important;">
+        <footer class="site-footer pt-16 pb-10 mt-20 text-white font-['Hind_Siliguri']" style="background-color: #C0122B !important;">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Logo -->
                 <div class="mb-8 overflow-hidden">
