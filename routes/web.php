@@ -9,8 +9,7 @@ Route::get('/category/{slug}', [ArticleController::class, 'category'])->name('ca
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/search', [ArticleController::class, 'search'])->name('search');
 
-Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])->name('page.show');
-
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index']);
+Route::get('/{slug}', [\App\Http\Controllers\PageController::class, 'show'])->name('page.show');
 
 
