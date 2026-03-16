@@ -18,6 +18,12 @@ class Article extends Model
     
     protected static function booted()
     {
+        static::saving(function ($article) {
+            if ($article->status === 'published' && is_null($article->published_at)) {
+                $article->published_at = now();
+            }
+        });
+
         static::saved(function ($article) {
             if ($article->featured_image && $article->wasChanged('featured_image')) {
                 // Image Optimization Logic

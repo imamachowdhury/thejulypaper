@@ -71,7 +71,8 @@ class ArticleResource extends Resource
                                     ->required()
                                     ->default('draft'),
 
-                                Forms\Components\DateTimePicker::make('published_at'),
+                                Forms\Components\DateTimePicker::make('published_at')
+                                    ->default(now()),
 
                                 Forms\Components\Toggle::make('is_featured'),
                             ]),
