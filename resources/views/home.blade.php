@@ -201,78 +201,86 @@
     <!-- Segment: Opinion (মতামত) Section -->
     @if($opinionCategory && $opinionArticles->isNotEmpty())
     <div class="py-12 border-t mt-12">
-        <!-- Collection Title Header -->
-        <h2 class="mb-10 flex items-center group">
-            <a href="{{ route('category.show', $opinionCategory->slug) }}" class="flex items-center space-x-1">
-                <span class="text-3xl font-black text-slate-900 hover:text-pa-red transition-colors pa-headline">{{ $opinionCategory->name }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="32" width="32" class="text-pa-red group-hover:translate-x-1 transition-transform">
-                    <path fill="currentColor" d="M9.224,17.776c-0.14-0.175-0.214-0.368-0.223-0.578c-0.009-0.21,0.066-0.394,0.223-0.551l4.621-4.621 L9.198,7.379c-0.14-0.14-0.206-0.328-0.197-0.564S9.084,6.39,9.224,6.25c0.175-0.175,0.363-0.258,0.564-0.249 c0.201,0.009,0.381,0.092,0.538,0.249l5.225,5.225c0.087,0.087,0.149,0.175,0.184,0.262s0.052,0.184,0.052,0.289 c0,0.105-0.017,0.201-0.052,0.289c-0.035,0.088-0.096,0.175-0.184,0.263l-5.199,5.199c-0.157,0.158-0.341,0.232-0.551,0.223 C9.592,17.991,9.399,17.916,9.224,17.776z"></path>
-                </svg>
-            </a>
-        </h2>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            <!-- Left: Featured Opinion Column -->
-            @php $pLead = $opinionArticles->first(); @endphp
-            <div class="lg:col-span-4 rounded-sm border border-slate-200 p-8 flex flex-col justify-between bg-white shadow-sm hover:shadow-md transition-shadow relative overflow-hidden h-full">
-                <div class="relative z-10">
-                    <h3 class="mb-6">
-                        <a href="{{ route('articles.show', $pLead->slug) }}" class="block">
-                            <span class="inline-block relative">
-                                <span class="bg-[#001D4A] text-white px-2 py-1.5 text-2xl md:text-3xl font-black leading-[1.6] [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
-                                    <span class="text-[#FFB82B] mr-2">মতামত</span>{{ $pLead->title }}
-                                </span>
-                            </span>
-                        </a>
-                    </h3>
-                    <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-10 line-clamp-4">
-                        {{ $pLead->excerpt }}
-                    </p>
-                </div>
-                
-                <div class="mt-auto border-t border-slate-100 pt-6">
-                    <div class="flex items-center space-x-2">
-                        <span class="text-[11px] font-bold text-slate-400">লেখা:</span>
-                        <span class="text-[13px] font-black text-slate-800">{{ $pLead->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
-                    </div>
-                </div>
+        <div class="max-w-7xl mx-auto">
+            <!-- Collection Header -->
+            <div class="mb-10 bottom-space">
+                <h2 class="mN6fk text-3xl font-black pa-headline">
+                    <a href="{{ route('category.show', $opinionCategory->slug) }}" class="flex items-center space-x-1 group">
+                        <span class="text-slate-900 group-hover:text-pa-red transition-colors">{{ $opinionCategory->name }}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="32" width="32" class="text-pa-red group-hover:translate-x-1 transition-transform">
+                            <path fill="currentColor" d="M9.224,17.776c-0.14-0.175-0.214-0.368-0.223-0.578c-0.009-0.21,0.066-0.394,0.223-0.551l4.621-4.621 L9.198,7.379c-0.14-0.14-0.206-0.328-0.197-0.564S9.084,6.39,9.224,6.25c0.175-0.175,0.363-0.258,0.564-0.249 c0.201,0.009,0.381,0.092,0.538,0.249l5.225,5.225c0.087,0.087,0.149,0.175,0.184,0.262s0.052,0.184,0.052,0.289 c0,0.105-0.017,0.201-0.052,0.289c-0.035,0.088-0.096,0.175-0.184,0.263l-5.199,5.199c-0.157,0.158-0.341,0.232-0.551,0.223 C9.592,17.991,9.399,17.916,9.224,17.776z"></path>
+                        </svg>
+                    </a>
+                </h2>
             </div>
 
-            <!-- Right: Opinion Stories List Column -->
-            <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-1 gap-y-8">
-                @foreach($opinionArticles->slice(1) as $article)
-                <div class="flex items-start space-x-6 group border-b border-slate-50 pb-8 last:border-0 last:pb-0">
-                    <div class="flex-shrink-0">
-                        <a href="{{ route('articles.show', $article->slug) }}" class="block">
-                            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border border-slate-100 shadow-sm group-hover:border-pa-red transition-all duration-300 bg-slate-50">
-                                @if($article->featured_image)
-                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                @else
-                                    <div class="w-full h-full flex items-center justify-center text-slate-200">
-                                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                        </svg>
-                                    </div>
-                                @endif
-                            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Left Column (organism1) -->
+                @php $pLead = $opinionArticles->first(); @endphp
+                <div class="lg:col-span-5 flex flex-col h-full">
+                    <div class="organism1 flex-1">
+                        <div class="card-with-image-zoom mb-6">
+                            <h3 class="headline-title text-2xl md:text-3xl font-black pa-headline leading-relaxed">
+                                <a href="{{ route('articles.show', $pLead->slug) }}" class="title-link">
+                                    <span class="opinion-highlighter">
+                                        <span class="opinion-sub-title">মতামত</span>{{ $pLead->title }}
+                                    </span>
+                                </a>
+                            </h3>
+                        </div>
+                        <a href="{{ route('articles.show', $pLead->slug) }}" class="excerpt text-slate-600 md:text-lg leading-relaxed mb-10 block line-clamp-4">
+                            {{ $pLead->excerpt }}
                         </a>
-                    </div>
-                    <div class="flex-1 space-y-2">
-                        <h3 class="text-lg md:text-xl font-black leading-snug group-hover:text-pa-red transition-colors pa-headline">
-                            <a href="{{ route('articles.show', $article->slug) }}" class="block">
-                                <span class="text-pa-red/90 mr-2">মতামত</span>{{ $article->title }}
-                            </a>
-                        </h3>
-                        <div class="flex items-center space-x-3 text-xs">
-                            <span class="font-bold text-slate-800">{{ $article->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
-                            @if($article->published_at)
-                            <span class="text-slate-300">•</span>
-                            <span class="text-slate-400">{{ toBangla($article->published_at->diffForHumans()) }}</span>
-                            @endif
+                        
+                        <div class="mt-auto pt-6">
+                            <div class="author-details flex items-center space-x-2 text-sm">
+                                <span class="contributor-name font-bold text-slate-400">লেখা:</span>
+                                <span class="author-location font-black text-slate-800">{{ $pLead->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                @endforeach
+
+                <!-- Right Column (organism2) -->
+                <div class="lg:col-span-7 flex flex-col space-y-10 lg:pl-10 lg:border-l border-slate-100">
+                    <div class="organism2 space-y-10">
+                        @foreach($opinionArticles->slice(1) as $article)
+                        <div class="opinion-story-card flex items-start space-x-6 group">
+                            <!-- Image/Thumbnail -->
+                            <div class="flex-shrink-0">
+                                <a href="{{ route('articles.show', $article->slug) }}">
+                                    <div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border border-slate-100 p-0.5 group-hover:border-pa-red transition-all duration-300">
+                                        @if($article->featured_image)
+                                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover rounded-full">
+                                        @else
+                                            <div class="w-full h-full bg-slate-50 flex items-center justify-center">
+                                                <svg class="w-8 h-8 text-slate-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Text Content -->
+                            <div class="story-details flex-1 space-y-2">
+                                <h3 class="headline-title text-base md:text-xl font-black leading-snug group-hover:text-pa-red transition-colors pa-headline">
+                                    <a href="{{ route('articles.show', $article->slug) }}" class="title-link">
+                                        <span class="text-pa-red mr-2 font-black">মতামত</span>{{ $article->title }}
+                                    </a>
+                                </h3>
+                                <div class="MdYVB flex items-center space-x-2 text-xs">
+                                    <span class="contributor-name font-bold text-slate-700">{{ $article->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
+                                    @if($article->published_at)
+                                    <span class="text-slate-300">•</span>
+                                    <span class="text-slate-400 font-bold">{{ toBangla($article->published_at->diffForHumans()) }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     </div>
