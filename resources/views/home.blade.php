@@ -187,7 +187,7 @@
                         </h4>
                         <div class="flex flex-col">
                             <span class="text-xs font-bold text-slate-700">{{ $article->user->name ?? 'জুলাই পেপার ডেস্ক' }}</span>
-                            <span class="text-[10px] text-slate-400 font-bold uppercase mt-1">{{ toBangla($article->published_at->diffForHumans()) }}</span>
+                            <span class="text-[10px] text-slate-400 font-bold uppercase mt-1">{{ $article->published_at ? toBangla($article->published_at->diffForHumans()) : '' }}</span>
                         </div>
                     </div>
                 </div>
