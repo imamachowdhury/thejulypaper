@@ -21,7 +21,7 @@
                 @endif
                 <div class="space-y-3">
                     <span class="text-pa-red font-black text-xs uppercase">{{ $featuredArticles[0]->category->name }}</span>
-                    <h1 class="text-3xl md:text-4xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline line-clamp-2">
+                    <h1 class="text-2xl md:text-3xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">
                         {{ $featuredArticles[0]->title }}
                     </h1>
                     <p class="text-slate-600 text-base line-clamp-3 leading-relaxed">
@@ -34,7 +34,7 @@
             <div class="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
                 @foreach($featuredArticles->slice(1, 2) as $article)
                 <div class="space-y-3 group cursor-pointer" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
-                    <h3 class="text-lg font-black leading-tight group-hover:text-pa-red transition-colors pa-headline line-clamp-3">
+                    <h3 class="text-base font-black leading-snug group-hover:text-pa-red transition-colors pa-headline">
                         {{ $article->title }}
                     </h3>
                     <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed">
@@ -73,7 +73,7 @@
                 @foreach($featuredArticles->slice(5, 6) as $article)
                 <div class="flex items-start gap-4 group cursor-pointer border-b border-slate-50 pb-6 last:border-0" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
                     <div class="flex-1">
-                        <h4 class="text-sm font-bold leading-tight group-hover:text-pa-red transition-colors line-clamp-3">
+                        <h4 class="text-[13px] font-bold leading-tight group-hover:text-pa-red transition-colors">
                             {{ $article->title }}
                         </h4>
                     </div>
@@ -120,7 +120,7 @@
             </div>
             <div class="text-center space-y-2">
                 <span class="text-pa-red font-black text-[10px] uppercase">{{ $article->category->name }}</span>
-                <h3 class="text-base md:text-lg font-black leading-tight group-hover:text-pa-red transition-colors pa-headline line-clamp-3 px-2">
+                <h3 class="text-sm md:text-base font-black leading-tight group-hover:text-pa-red transition-colors pa-headline px-2">
                     {{ $article->title }}
                 </h3>
             </div>
