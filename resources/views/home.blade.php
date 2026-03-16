@@ -1,117 +1,124 @@
 @extends('layouts.app')
 
+@php
+    if (!function_exists('toBangla')) {
+        function toBangla($number) {
+            $search = ['0','1','2','3','4','5','6','7','8','9'];
+            $replace = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+            return str_replace($search, $replace, $number);
+        }
+    }
+@endphp
+
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Top Section: Lead & Headlines -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 border-b pb-12">
-        <!-- Lead Content (Column 1-9) -->
-        <div class="lg:col-span-9">
-            @if($featuredArticles->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Main Lead -->
-                <div class="md:col-span-2 group cursor-pointer" onclick="window.location='{{ route('articles.show', $featuredArticles[0]->slug) }}'">
-                    <div class="aspect-[16/10] overflow-hidden rounded bg-slate-100 mb-4">
-                        @if($featuredArticles[0]->featured_image)
-                        <img src="{{ \Illuminate\Support\Facades\Storage::url($featuredArticles[0]->featured_image) }}" alt="{{ $featuredArticles[0]->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        @else
-                        <div class="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400 font-serif font-black text-4xl opacity-10">জুলাই পেপার</div>
-                        @endif
-                    </div>
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-black leading-tight group-hover:text-pa-red transition-colors mb-3 pa-headline">
+    <!-- Top Section: Featured News Grid -->
+    @if($featuredArticles->count() > 0)
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 border-b pb-12">
+        
+        <!-- Column 1: Lead + 2 Sub (Col 1-5) -->
+        <div class="lg:col-span-5 space-y-10">
+            <!-- Lead Article -->
+            <div class="group cursor-pointer" onclick="window.location='{{ route('articles.show', $featuredArticles[0]->slug) }}'">
+                @if($featuredArticles[0]->featured_image)
+                <div class="aspect-[16/10] overflow-hidden rounded bg-slate-100 mb-5 relative">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($featuredArticles[0]->featured_image) }}" alt="{{ $featuredArticles[0]->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </div>
+                @endif
+                <div class="space-y-3">
+                    <span class="text-pa-red font-black text-xs uppercase">{{ $featuredArticles[0]->category->name }}</span>
+                    <h1 class="text-3xl md:text-4xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline line-clamp-2">
                         {{ $featuredArticles[0]->title }}
                     </h1>
-                    <p class="text-slate-600 text-sm sm:text-base md:text-lg line-clamp-3">
+                    <p class="text-slate-600 text-base line-clamp-3 leading-relaxed">
                         {{ $featuredArticles[0]->excerpt }}
                     </p>
-                    <div class="mt-4 flex items-center text-xs font-bold text-slate-400 uppercase tracking-tighter">
-                        <span class="text-pa-red">{{ $featuredArticles[0]->category->name }}</span>
-                        <span class="mx-2">•</span>
-                        <span>{{ $featuredArticles[0]->published_at->diffForHumans() }}</span>
-                    </div>
-                </div>
-
-                <!-- Secondary Grid -->
-                <div class="space-y-6">
-                    @foreach($featuredArticles->slice(1, 3) as $article)
-                    <div class="group cursor-pointer flex flex-col" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
-                        <div class="aspect-video overflow-hidden rounded bg-slate-100 mb-3">
-                            @if($article->featured_image)
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
-                            @else
-                            <div class="w-full h-full bg-slate-100"></div>
-                            @endif
-                        </div>
-                        <h2 class="text-lg font-bold leading-snug group-hover:text-pa-red transition-colors pa-headline">
-                            {{ $article->title }}
-                        </h2>
-                        <span class="mt-2 text-[10px] font-black text-slate-400 uppercase tracking-widest">{{ $article->published_at->diffForHumans() }}</span>
-                    </div>
-                    @endforeach
                 </div>
             </div>
 
-            <!-- Restore Latest Section here if it was removed -->
-            <div class="mt-12 md:mt-16">
-                <div class="flex items-center space-x-2 mb-8 border-b pb-2 border-pa-red inline-block">
-                    <span class="w-1.5 h-6 bg-pa-red"></span>
-                    <h2 class="text-xl md:text-2xl font-black uppercase tracking-widest">সর্বশেষ সংবাদ</h2>
+            <!-- Sub Articles (2 Grid) -->
+            <div class="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
+                @foreach($featuredArticles->slice(1, 2) as $article)
+                <div class="space-y-3 group cursor-pointer" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
+                    <h3 class="text-lg font-black leading-tight group-hover:text-pa-red transition-colors pa-headline line-clamp-3">
+                        {{ $article->title }}
+                    </h3>
+                    <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed">
+                        {{ $article->excerpt }}
+                    </p>
                 </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                    @foreach($latestArticles as $article)
-                    <a href="{{ route('articles.show', $article->slug) }}" class="group flex flex-row-reverse lg:block gap-4 border-b lg:border-none pb-4 lg:pb-0">
-                        <div class="w-1/3 lg:w-full aspect-[16/9] mb-0 lg:mb-4 flex-shrink-0">
-                            @if($article->featured_image)
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover rounded-sm group-hover:shadow-md transition-all">
-                            @else
-                            <div class="w-full h-full bg-slate-50 border flex items-center justify-center text-slate-300 font-serif text-sm opacity-50">জুলাই পেপার</div>
-                            @endif
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-sm md:text-lg font-bold group-hover:text-pa-red transition-colors pa-headline line-clamp-3">
-                                {{ $article->title }}
-                            </h3>
-                            <div class="mt-2 flex items-center text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
-                                <span class="text-pa-red mr-2">{{ $article->category->name }}</span>
-                                <span>{{ $article->published_at ? $article->published_at->diffForHumans() : '' }}</span>
-                            </div>
-                        </div>
-                    </a>
-                    @endforeach
-                </div>
+                @endforeach
             </div>
-            @endif
         </div>
 
-        <!-- Sidebar: Most Read/Latest (Column 10-12) -->
-        <div class="lg:col-span-3">
-            <div class="lg:border-l lg:pl-8">
-                <div class="flex items-center space-x-2 mb-6 border-b pb-2 border-pa-red inline-block">
-                    <span class="w-1 h-5 bg-pa-red"></span>
-                    <h3 class="text-sm font-black uppercase tracking-widest">সর্বাধিক পঠিত</h3>
+        <!-- Column 2: 2 Stacked Medium (Col 6-9) -->
+        <div class="lg:col-span-4 lg:border-l lg:pl-10 space-y-10 border-t lg:border-t-0 pt-10 lg:pt-0">
+            @foreach($featuredArticles->slice(3, 2) as $article)
+            <div class="group cursor-pointer space-y-4" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
+                @if($article->featured_image)
+                <div class="aspect-video overflow-hidden rounded bg-slate-100">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
                 </div>
-                @php
-                    function toBangla($number) {
-                        $search = ['0','1','2','3','4','5','6','7','8','9'];
-                        $replace = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-                        return str_replace($search, $replace, $number);
-                    }
-                @endphp
-                <div class="space-y-8">
-                    @foreach($mostReadArticles as $index => $article)
-                    <div class="flex space-x-4 group cursor-pointer" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
-                        <span class="text-3xl font-black text-slate-200 group-hover:text-pa-red transition-colors italic leading-none">{{ toBangla($index + 1) }}</span>
-                        <div>
-                            <h4 class="text-sm font-bold leading-tight group-hover:text-pa-red transition-colors">{{ $article->title }}</h4>
-                        </div>
-                    </div>
-                    @endforeach
+                @endif
+                <div class="space-y-3">
+                    <h2 class="text-xl font-black leading-tight group-hover:text-pa-red transition-colors pa-headline">
+                        {{ $article->title }}
+                    </h2>
+                    <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed">
+                        {{ $article->excerpt }}
+                    </p>
                 </div>
-                
+            </div>
+            @if(!$loop->last) <hr class="border-slate-100"> @endif
+            @endforeach
+        </div>
 
+        <!-- Column 3: Sidebar List with Right Micro-Thumbnails (Col 10-12) -->
+        <div class="lg:col-span-3 lg:border-l lg:pl-10 border-t lg:border-t-0 pt-10 lg:pt-0">
+            <div class="space-y-6">
+                @foreach($featuredArticles->slice(5, 6) as $article)
+                <div class="flex items-start gap-4 group cursor-pointer border-b border-slate-50 pb-6 last:border-0" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold leading-tight group-hover:text-pa-red transition-colors line-clamp-3">
+                            {{ $article->title }}
+                        </h4>
+                    </div>
+                    @if($article->featured_image)
+                    <div class="w-20 h-14 flex-shrink-0 bg-slate-100 overflow-hidden rounded-sm">
+                        <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    @else
+                    <div class="w-20 h-14 bg-slate-50 rounded-sm"></div>
+                    @endif
+                </div>
+                @endforeach
             </div>
         </div>
     </div>
+
+    <!-- Circular Bottom Row -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b pb-12 pt-12">
+        @foreach($featuredArticles->slice(11, 4) as $article)
+        <div class="group cursor-pointer space-y-5" onclick="window.location='{{ route('articles.show', $article->slug) }}'">
+            <div class="flex justify-center flex-shrink-0">
+                <div class="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-pa-red/10 p-1 group-hover:border-pa-red transition-all duration-500">
+                    @if($article->featured_image)
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($article->featured_image) }}" class="w-full h-full object-cover rounded-full">
+                    @else
+                    <div class="w-full h-full bg-slate-100 rounded-full"></div>
+                    @endif
+                </div>
+            </div>
+            <div class="text-center space-y-2">
+                <span class="text-pa-red font-black text-[10px] uppercase">{{ $article->category->name }}</span>
+                <h3 class="text-base md:text-lg font-black leading-tight group-hover:text-pa-red transition-colors pa-headline line-clamp-3 px-2">
+                    {{ $article->title }}
+                </h3>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    @endif
 
     <!-- Segment: Category Based Sections -->
     <div class="py-12 space-y-16">

@@ -13,7 +13,7 @@ class ArticleController extends Controller
             ->where('status', 'published')
             ->where('is_featured', true)
             ->latest('published_at')
-            ->take(3)
+            ->take(15)
             ->get();
 
         $latestArticles = Article::with(['category', 'user'])
