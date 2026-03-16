@@ -62,10 +62,21 @@
             margin: 0 !important;
         }
         .social-wrap {
-            gap: 1rem !important; /* gap-4 equivalent */
+            display: flex !important;
+            align-items: center !important;
+        }
+        .social-wrap > span {
+            margin-right: 1rem !important;
         }
         .social-icons {
-            gap: 0.75rem !important; /* gap-3 equivalent */
+            display: flex !important;
+            align-items: center !important;
+        }
+        .social-icons > a {
+            margin-right: 1rem !important;
+        }
+        .social-icons > a:last-child {
+            margin-right: 0 !important;
         }
     </style>
 </head>
