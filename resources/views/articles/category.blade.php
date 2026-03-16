@@ -34,14 +34,6 @@
                     {{ $article->excerpt }}
                 </p>
                 
-                <div class="flex items-center space-x-3 pt-4 border-t border-slate-50">
-                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold uppercase">
-                        {{ substr($article->user->name, 0, 1) }}
-                    </div>
-                    <span class="text-[11px] font-black text-slate-900 uppercase tracking-widest">
-                        {{ $article->user->name }}
-                    </span>
-                </div>
             </div>
         </div>
         @endforeach

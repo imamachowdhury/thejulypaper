@@ -19,15 +19,6 @@
                 </h1>
                 
                 <div class="flex flex-col md:flex-row md:items-center justify-between border-y py-4 gap-4">
-                    <div class="flex items-center space-x-3">
-                        <div class="h-10 w-10 bg-slate-100 border rounded-full flex items-center justify-center font-bold text-pa-red text-sm">
-                            {{ substr($article->user->name, 0, 1) }}
-                        </div>
-                        <div>
-                            <span class="block text-sm font-black text-slate-800 tracking-tight">{{ $article->user->name }}</span>
-                            <span class="block text-xs text-slate-400">ডেস্ক / জুলাই পেপার</span>
-                        </div>
-                    </div>
                     <div class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center space-x-4">
                         <span>আপডেট: {{ \Carbon\Carbon::parse($article->published_at)->isoFormat('LLLL') }}</span>
                     </div>
@@ -52,17 +43,6 @@
                     @endforeach
                 </div>
                 
-                <div class="bg-slate-50 border rounded-xl p-8 flex items-center space-x-6">
-                    <div class="h-16 w-16 sm:h-20 sm:w-20 bg-white border-2 border-pa-red rounded-full flex-shrink-0 flex items-center justify-center text-xl sm:text-2xl font-black text-pa-red">
-                        {{ substr($article->user->name, 0, 1) }}
-                    </div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-black text-slate-900">{{ $article->user->name }} সম্পর্কে</h3>
-                        <p class="text-slate-500 text-sm mt-1 leading-relaxed">
-                            {{ $article->user->name }} গত এক দশকেরও বেশি সময় ধরে জাতীয় ও আন্তর্জাতিক সংবাদ কভারেজের সাথে যুক্ত আছেন। 
-                        </p>
-                    </div>
-                </div>
             </div>
         </article>
 
