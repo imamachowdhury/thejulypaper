@@ -11,6 +11,7 @@ use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Filament\Forms\Get;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -44,9 +45,25 @@ class ArticleResource extends Resource
                                 Forms\Components\Textarea::make('excerpt')
                                     ->rows(3),
 
+                                Forms\Components\Toggle::make('is_html_article')
+                                    ->label('Use HTML/CSS Editor (Advanced)')
+                                    ->live(),
+
                                 Forms\Components\RichEditor::make('content')
                                     ->required()
-                                    ->columnSpanFull(),
+                                    ->columnSpanFull()
+                                    ->hidden(fn ($get): bool => $get('is_html_article') === true),
+
+                                Forms\Components\CodeEditor::make('content')
+                                    ->label('HTML Content')
+                                    ->required()
+                                    ->columnSpanFull()
+                                    ->visible(fn ($get): bool => $get('is_html_article') === true),
+
+                                Forms\Components\CodeEditor::make('custom_css')
+                                    ->label('Custom CSS')
+                                    ->columnSpanFull()
+                                    ->visible(fn ($get): bool => $get('is_html_article') === true),
                             ]),
 
                         Section::make('অতিরিক্ত সূত্র (Additional References)')

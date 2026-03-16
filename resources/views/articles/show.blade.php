@@ -68,9 +68,20 @@
             <figure class="mb-8 overflow-hidden rounded shadow-sm">
                 <img src="{{ $article->featured_image_url }}" alt="{{ $article->title }}" class="w-full h-auto">
             </figure>
-            <div class="prose prose-lg max-w-none text-slate-800 prose-pa-red">
-                {!! $article->content !!}
-            </div>
+            @if($article->is_html_article)
+                @if($article->custom_css)
+                    <style>
+                        {!! $article->custom_css !!}
+                    </style>
+                @endif
+                <div class="mb-8">
+                    {!! $article->content !!}
+                </div>
+            @else
+                <div class="prose prose-lg max-w-none text-slate-800 prose-pa-red mb-8">
+                    {!! $article->content !!}
+                </div>
+            @endif
 
             @if($article->references && count($article->references) > 0)
             <div class="mt-12 p-6 bg-slate-50 rounded-lg border border-slate-100">
